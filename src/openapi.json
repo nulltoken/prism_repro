@@ -1,0 +1,193 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/specific/echo/tests/{test_id}": {
+      "get": {
+        "summary": "Echo",
+        "description": "Cf. summary",
+        "parameters": [
+          {
+            "name": "authorization",
+            "description": "Bearer token.",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "JSON Web Token RFC 7519",
+              "maxLength": 4000
+            }
+          },
+          {
+            "name": "x-environment",
+            "in": "header",
+            "description": "Header x-environment",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "prod"
+              ]
+            }
+          },
+          {
+            "name": "x-tenant-id",
+            "description": "The unique identifier of the tenant",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 50
+            }
+          },
+          {
+            "name": "test_id",
+            "description": "Identifier of the test",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 150
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Your request back.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "maxLength": 50
+                    },
+                    "error_description": {
+                      "type": "string",
+                      "maxLength": 4000
+                    },
+                    "status_code": {
+                      "type": "string",
+                      "maxLength": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (JWT not valid).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "maxLength": 50
+                    },
+                    "error_description": {
+                      "type": "string",
+                      "maxLength": 4000
+                    },
+                    "status_code": {
+                      "type": "string",
+                      "maxLength": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden (doesn't have the valid scope).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "maxLength": 50
+                    },
+                    "error_description": {
+                      "type": "string",
+                      "maxLength": 4000
+                    },
+                    "status_code": {
+                      "type": "string",
+                      "maxLength": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found (Resource not found).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "maxLength": 50
+                    },
+                    "error_description": {
+                      "type": "string",
+                      "maxLength": 4000
+                    },
+                    "status_code": {
+                      "type": "string",
+                      "maxLength": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default response format.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "maxLength": 50
+                    },
+                    "error_description": {
+                      "type": "string",
+                      "maxLength": 4000
+                    },
+                    "status_code": {
+                      "type": "string",
+                      "maxLength": 3
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

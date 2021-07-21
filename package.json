@@ -8,10 +8,7 @@
     "yarn": "^1.15.2"
   },
   "dependencies": {
-    "@stoplight/prism-cli": "4.1.2"
-  },
-  "resolutions": {
-    "@stoplight/prism-cli/json-schema-ref-parser": "9.0.8"
+    "@stoplight/prism-cli": "^4.3.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",

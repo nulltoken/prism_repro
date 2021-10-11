@@ -40,11 +40,23 @@ const start = async () => {
     throw new Error("Unmatched request");
   }
 
-  const resource = r.right;
+  let resource = r.right;
 
   global.gc();
 
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 5000; i++) {
+
+    if (i % 10 === 0) {
+      // Regularly update the list of operations
+      // from a new version of the spec
+      const resources = await getHttpOperationsFromSpec(spec);
+      const r = route({ resources, input: inputRequest });
+      if (isLeft(r)) {
+        throw new Error("Unmatched request");
+      }
+
+      resource = r.right;
+    }
 
     validateInput({ resource, element: inputRequest });
     validateOutput({ resource, element: inputResponse });
